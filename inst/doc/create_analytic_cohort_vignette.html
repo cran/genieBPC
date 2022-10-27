@@ -120,13 +120,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   for (var i = 0; i < sheets.length; i++) {
     if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
     try { var rules = sheets[i].cssRules; } catch (e) { continue; }
-    for (var j = 0; j < rules.length; j++) {
+    var j = 0;
+    while (j < rules.length) {
       var rule = rules[j];
       // check if there is a div.sourceCode rule
-      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
       var style = rule.style.cssText;
       // check if color or background-color is set
-      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
       // replace div.sourceCode by a pre.sourceCode rule
       sheets[i].deleteRule(j);
       sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
@@ -361,12 +368,12 @@ library and log into Synapse using the
 <h2>Modifying Function Arguments</h2>
 <p>The <code>create_analytic_cohort()</code> function includes several
 input parameters:</p>
-<div id="fareifhhci" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="lmikbowzvr" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#fareifhhci .gt_table {
+#lmikbowzvr .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -391,7 +398,7 @@ input parameters:</p>
   border-left-color: #D3D3D3;
 }
 
-#fareifhhci .gt_heading {
+#lmikbowzvr .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -403,7 +410,7 @@ input parameters:</p>
   border-right-color: #D3D3D3;
 }
 
-#fareifhhci .gt_title {
+#lmikbowzvr .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -415,7 +422,7 @@ input parameters:</p>
   border-bottom-width: 0;
 }
 
-#fareifhhci .gt_subtitle {
+#lmikbowzvr .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -427,13 +434,13 @@ input parameters:</p>
   border-top-width: 0;
 }
 
-#fareifhhci .gt_bottom_border {
+#lmikbowzvr .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#fareifhhci .gt_col_headings {
+#lmikbowzvr .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -448,7 +455,7 @@ input parameters:</p>
   border-right-color: #D3D3D3;
 }
 
-#fareifhhci .gt_col_heading {
+#lmikbowzvr .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -468,7 +475,7 @@ input parameters:</p>
   overflow-x: hidden;
 }
 
-#fareifhhci .gt_column_spanner_outer {
+#lmikbowzvr .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -480,15 +487,15 @@ input parameters:</p>
   padding-right: 4px;
 }
 
-#fareifhhci .gt_column_spanner_outer:first-child {
+#lmikbowzvr .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#fareifhhci .gt_column_spanner_outer:last-child {
+#lmikbowzvr .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#fareifhhci .gt_column_spanner {
+#lmikbowzvr .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -500,7 +507,7 @@ input parameters:</p>
   width: 100%;
 }
 
-#fareifhhci .gt_group_heading {
+#lmikbowzvr .gt_group_heading {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -525,7 +532,7 @@ input parameters:</p>
   vertical-align: middle;
 }
 
-#fareifhhci .gt_empty_group_heading {
+#lmikbowzvr .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -540,15 +547,15 @@ input parameters:</p>
   vertical-align: middle;
 }
 
-#fareifhhci .gt_from_md > :first-child {
+#lmikbowzvr .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#fareifhhci .gt_from_md > :last-child {
+#lmikbowzvr .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#fareifhhci .gt_row {
+#lmikbowzvr .gt_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -567,7 +574,7 @@ input parameters:</p>
   overflow-x: hidden;
 }
 
-#fareifhhci .gt_stub {
+#lmikbowzvr .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -580,7 +587,7 @@ input parameters:</p>
   padding-right: 5px;
 }
 
-#fareifhhci .gt_stub_row_group {
+#lmikbowzvr .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -594,11 +601,11 @@ input parameters:</p>
   vertical-align: top;
 }
 
-#fareifhhci .gt_row_group_first td {
+#lmikbowzvr .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#fareifhhci .gt_summary_row {
+#lmikbowzvr .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -608,16 +615,16 @@ input parameters:</p>
   padding-right: 5px;
 }
 
-#fareifhhci .gt_first_summary_row {
+#lmikbowzvr .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#fareifhhci .gt_first_summary_row.thick {
+#lmikbowzvr .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#fareifhhci .gt_last_summary_row {
+#lmikbowzvr .gt_last_summary_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -627,7 +634,7 @@ input parameters:</p>
   border-bottom-color: #D3D3D3;
 }
 
-#fareifhhci .gt_grand_summary_row {
+#lmikbowzvr .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -637,7 +644,7 @@ input parameters:</p>
   padding-right: 5px;
 }
 
-#fareifhhci .gt_first_grand_summary_row {
+#lmikbowzvr .gt_first_grand_summary_row {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 5px;
@@ -647,11 +654,11 @@ input parameters:</p>
   border-top-color: #D3D3D3;
 }
 
-#fareifhhci .gt_striped {
+#lmikbowzvr .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#fareifhhci .gt_table_body {
+#lmikbowzvr .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -660,7 +667,7 @@ input parameters:</p>
   border-bottom-color: #D3D3D3;
 }
 
-#fareifhhci .gt_footnotes {
+#lmikbowzvr .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -674,7 +681,7 @@ input parameters:</p>
   border-right-color: #D3D3D3;
 }
 
-#fareifhhci .gt_footnote {
+#lmikbowzvr .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 1px;
@@ -683,7 +690,7 @@ input parameters:</p>
   padding-right: 5px;
 }
 
-#fareifhhci .gt_sourcenotes {
+#lmikbowzvr .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -697,7 +704,7 @@ input parameters:</p>
   border-right-color: #D3D3D3;
 }
 
-#fareifhhci .gt_sourcenote {
+#lmikbowzvr .gt_sourcenote {
   font-size: 90%;
   padding-top: 1px;
   padding-bottom: 1px;
@@ -705,80 +712,73 @@ input parameters:</p>
   padding-right: 5px;
 }
 
-#fareifhhci .gt_left {
+#lmikbowzvr .gt_left {
   text-align: left;
 }
 
-#fareifhhci .gt_center {
+#lmikbowzvr .gt_center {
   text-align: center;
 }
 
-#fareifhhci .gt_right {
+#lmikbowzvr .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#fareifhhci .gt_font_normal {
+#lmikbowzvr .gt_font_normal {
   font-weight: normal;
 }
 
-#fareifhhci .gt_font_bold {
+#lmikbowzvr .gt_font_bold {
   font-weight: bold;
 }
 
-#fareifhhci .gt_font_italic {
+#lmikbowzvr .gt_font_italic {
   font-style: italic;
 }
 
-#fareifhhci .gt_super {
+#lmikbowzvr .gt_super {
   font-size: 65%;
 }
 
-#fareifhhci .gt_two_val_uncert {
-  display: inline-block;
-  line-height: 1em;
-  text-align: right;
-  font-size: 60%;
-  vertical-align: -0.25em;
-  margin-left: 0.1em;
-}
-
-#fareifhhci .gt_footnote_marks {
+#lmikbowzvr .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#fareifhhci .gt_asterisk {
+#lmikbowzvr .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#fareifhhci .gt_slash_mark {
-  font-size: 0.7em;
-  line-height: 0.7em;
-  vertical-align: 0.15em;
+#lmikbowzvr .gt_indent_1 {
+  text-indent: 5px;
 }
 
-#fareifhhci .gt_fraction_numerator {
-  font-size: 0.6em;
-  line-height: 0.6em;
-  vertical-align: 0.45em;
+#lmikbowzvr .gt_indent_2 {
+  text-indent: 10px;
 }
 
-#fareifhhci .gt_fraction_denominator {
-  font-size: 0.6em;
-  line-height: 0.6em;
-  vertical-align: -0.05em;
+#lmikbowzvr .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#lmikbowzvr .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#lmikbowzvr .gt_indent_5 {
+  text-indent: 25px;
 }
 </style>
 <table class="gt_table">
   
   <thead class="gt_col_headings">
     <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Argument</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Description</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col">Argument</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col">Description</th>
     </tr>
   </thead>
   <tbody class="gt_table_body">
@@ -877,12 +877,12 @@ drug multiple times, only select the first time.</p>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                                                 <span class="at">regimen_order_type =</span> <span class="st">&quot;within regimen&quot;</span>,</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                                                 <span class="at">return_summary =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>nsclc_cisplatin_pem_any<span class="sc">$</span>tbl_overall_summary</span></code></pre></div>
-<div id="kjfsblyutf" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="qhkmymhkog" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#kjfsblyutf .gt_table {
+#qhkmymhkog .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -907,7 +907,7 @@ drug multiple times, only select the first time.</p>
   border-left-color: #D3D3D3;
 }
 
-#kjfsblyutf .gt_heading {
+#qhkmymhkog .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -919,7 +919,7 @@ drug multiple times, only select the first time.</p>
   border-right-color: #D3D3D3;
 }
 
-#kjfsblyutf .gt_title {
+#qhkmymhkog .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -931,7 +931,7 @@ drug multiple times, only select the first time.</p>
   border-bottom-width: 0;
 }
 
-#kjfsblyutf .gt_subtitle {
+#qhkmymhkog .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -943,13 +943,13 @@ drug multiple times, only select the first time.</p>
   border-top-width: 0;
 }
 
-#kjfsblyutf .gt_bottom_border {
+#qhkmymhkog .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#kjfsblyutf .gt_col_headings {
+#qhkmymhkog .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -964,7 +964,7 @@ drug multiple times, only select the first time.</p>
   border-right-color: #D3D3D3;
 }
 
-#kjfsblyutf .gt_col_heading {
+#qhkmymhkog .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -984,7 +984,7 @@ drug multiple times, only select the first time.</p>
   overflow-x: hidden;
 }
 
-#kjfsblyutf .gt_column_spanner_outer {
+#qhkmymhkog .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -996,15 +996,15 @@ drug multiple times, only select the first time.</p>
   padding-right: 4px;
 }
 
-#kjfsblyutf .gt_column_spanner_outer:first-child {
+#qhkmymhkog .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kjfsblyutf .gt_column_spanner_outer:last-child {
+#qhkmymhkog .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kjfsblyutf .gt_column_spanner {
+#qhkmymhkog .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1016,7 +1016,7 @@ drug multiple times, only select the first time.</p>
   width: 100%;
 }
 
-#kjfsblyutf .gt_group_heading {
+#qhkmymhkog .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1041,7 +1041,7 @@ drug multiple times, only select the first time.</p>
   vertical-align: middle;
 }
 
-#kjfsblyutf .gt_empty_group_heading {
+#qhkmymhkog .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1056,15 +1056,15 @@ drug multiple times, only select the first time.</p>
   vertical-align: middle;
 }
 
-#kjfsblyutf .gt_from_md > :first-child {
+#qhkmymhkog .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kjfsblyutf .gt_from_md > :last-child {
+#qhkmymhkog .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kjfsblyutf .gt_row {
+#qhkmymhkog .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1083,7 +1083,7 @@ drug multiple times, only select the first time.</p>
   overflow-x: hidden;
 }
 
-#kjfsblyutf .gt_stub {
+#qhkmymhkog .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1096,7 +1096,7 @@ drug multiple times, only select the first time.</p>
   padding-right: 5px;
 }
 
-#kjfsblyutf .gt_stub_row_group {
+#qhkmymhkog .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1110,11 +1110,11 @@ drug multiple times, only select the first time.</p>
   vertical-align: top;
 }
 
-#kjfsblyutf .gt_row_group_first td {
+#qhkmymhkog .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#kjfsblyutf .gt_summary_row {
+#qhkmymhkog .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1124,16 +1124,16 @@ drug multiple times, only select the first time.</p>
   padding-right: 5px;
 }
 
-#kjfsblyutf .gt_first_summary_row {
+#qhkmymhkog .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#kjfsblyutf .gt_first_summary_row.thick {
+#qhkmymhkog .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#kjfsblyutf .gt_last_summary_row {
+#qhkmymhkog .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1143,7 +1143,7 @@ drug multiple times, only select the first time.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#kjfsblyutf .gt_grand_summary_row {
+#qhkmymhkog .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1153,7 +1153,7 @@ drug multiple times, only select the first time.</p>
   padding-right: 5px;
 }
 
-#kjfsblyutf .gt_first_grand_summary_row {
+#qhkmymhkog .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1163,11 +1163,11 @@ drug multiple times, only select the first time.</p>
   border-top-color: #D3D3D3;
 }
 
-#kjfsblyutf .gt_striped {
+#qhkmymhkog .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kjfsblyutf .gt_table_body {
+#qhkmymhkog .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1176,7 +1176,7 @@ drug multiple times, only select the first time.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#kjfsblyutf .gt_footnotes {
+#qhkmymhkog .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1190,7 +1190,7 @@ drug multiple times, only select the first time.</p>
   border-right-color: #D3D3D3;
 }
 
-#kjfsblyutf .gt_footnote {
+#qhkmymhkog .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -1199,7 +1199,7 @@ drug multiple times, only select the first time.</p>
   padding-right: 5px;
 }
 
-#kjfsblyutf .gt_sourcenotes {
+#qhkmymhkog .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1213,7 +1213,7 @@ drug multiple times, only select the first time.</p>
   border-right-color: #D3D3D3;
 }
 
-#kjfsblyutf .gt_sourcenote {
+#qhkmymhkog .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1221,80 +1221,73 @@ drug multiple times, only select the first time.</p>
   padding-right: 5px;
 }
 
-#kjfsblyutf .gt_left {
+#qhkmymhkog .gt_left {
   text-align: left;
 }
 
-#kjfsblyutf .gt_center {
+#qhkmymhkog .gt_center {
   text-align: center;
 }
 
-#kjfsblyutf .gt_right {
+#qhkmymhkog .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kjfsblyutf .gt_font_normal {
+#qhkmymhkog .gt_font_normal {
   font-weight: normal;
 }
 
-#kjfsblyutf .gt_font_bold {
+#qhkmymhkog .gt_font_bold {
   font-weight: bold;
 }
 
-#kjfsblyutf .gt_font_italic {
+#qhkmymhkog .gt_font_italic {
   font-style: italic;
 }
 
-#kjfsblyutf .gt_super {
+#qhkmymhkog .gt_super {
   font-size: 65%;
 }
 
-#kjfsblyutf .gt_two_val_uncert {
-  display: inline-block;
-  line-height: 1em;
-  text-align: right;
-  font-size: 60%;
-  vertical-align: -0.25em;
-  margin-left: 0.1em;
-}
-
-#kjfsblyutf .gt_footnote_marks {
+#qhkmymhkog .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#kjfsblyutf .gt_asterisk {
+#qhkmymhkog .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#kjfsblyutf .gt_slash_mark {
-  font-size: 0.7em;
-  line-height: 0.7em;
-  vertical-align: 0.15em;
+#qhkmymhkog .gt_indent_1 {
+  text-indent: 5px;
 }
 
-#kjfsblyutf .gt_fraction_numerator {
-  font-size: 0.6em;
-  line-height: 0.6em;
-  vertical-align: 0.45em;
+#qhkmymhkog .gt_indent_2 {
+  text-indent: 10px;
 }
 
-#kjfsblyutf .gt_fraction_denominator {
-  font-size: 0.6em;
-  line-height: 0.6em;
-  vertical-align: -0.05em;
+#qhkmymhkog .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#qhkmymhkog .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#qhkmymhkog .gt_indent_5 {
+  text-indent: 25px;
 }
 </style>
 <table class="gt_table">
   
   <thead class="gt_col_headings">
     <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1"><strong>Characteristic</strong></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>N = 182 patients</strong><sup class="gt_footnote_marks">1</sup></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col"><strong>Characteristic</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col"><strong>N = 182 patients</strong><sup class="gt_footnote_marks">1</sup></th>
     </tr>
   </thead>
   <tbody class="gt_table_body">
@@ -1327,12 +1320,12 @@ drug multiple times, only select the first time.</p>
 </table>
 </div>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>nsclc_cisplatin_pem_any<span class="sc">$</span>tbl_cohort</span></code></pre></div>
-<div id="ukofpzrrop" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="uovwxiifoa" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#ukofpzrrop .gt_table {
+#uovwxiifoa .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1357,7 +1350,7 @@ drug multiple times, only select the first time.</p>
   border-left-color: #D3D3D3;
 }
 
-#ukofpzrrop .gt_heading {
+#uovwxiifoa .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1369,7 +1362,7 @@ drug multiple times, only select the first time.</p>
   border-right-color: #D3D3D3;
 }
 
-#ukofpzrrop .gt_title {
+#uovwxiifoa .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1381,7 +1374,7 @@ drug multiple times, only select the first time.</p>
   border-bottom-width: 0;
 }
 
-#ukofpzrrop .gt_subtitle {
+#uovwxiifoa .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1393,13 +1386,13 @@ drug multiple times, only select the first time.</p>
   border-top-width: 0;
 }
 
-#ukofpzrrop .gt_bottom_border {
+#uovwxiifoa .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ukofpzrrop .gt_col_headings {
+#uovwxiifoa .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1414,7 +1407,7 @@ drug multiple times, only select the first time.</p>
   border-right-color: #D3D3D3;
 }
 
-#ukofpzrrop .gt_col_heading {
+#uovwxiifoa .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1434,7 +1427,7 @@ drug multiple times, only select the first time.</p>
   overflow-x: hidden;
 }
 
-#ukofpzrrop .gt_column_spanner_outer {
+#uovwxiifoa .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1446,15 +1439,15 @@ drug multiple times, only select the first time.</p>
   padding-right: 4px;
 }
 
-#ukofpzrrop .gt_column_spanner_outer:first-child {
+#uovwxiifoa .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ukofpzrrop .gt_column_spanner_outer:last-child {
+#uovwxiifoa .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ukofpzrrop .gt_column_spanner {
+#uovwxiifoa .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1466,7 +1459,7 @@ drug multiple times, only select the first time.</p>
   width: 100%;
 }
 
-#ukofpzrrop .gt_group_heading {
+#uovwxiifoa .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1491,7 +1484,7 @@ drug multiple times, only select the first time.</p>
   vertical-align: middle;
 }
 
-#ukofpzrrop .gt_empty_group_heading {
+#uovwxiifoa .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1506,15 +1499,15 @@ drug multiple times, only select the first time.</p>
   vertical-align: middle;
 }
 
-#ukofpzrrop .gt_from_md > :first-child {
+#uovwxiifoa .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ukofpzrrop .gt_from_md > :last-child {
+#uovwxiifoa .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ukofpzrrop .gt_row {
+#uovwxiifoa .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1533,7 +1526,7 @@ drug multiple times, only select the first time.</p>
   overflow-x: hidden;
 }
 
-#ukofpzrrop .gt_stub {
+#uovwxiifoa .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1546,7 +1539,7 @@ drug multiple times, only select the first time.</p>
   padding-right: 5px;
 }
 
-#ukofpzrrop .gt_stub_row_group {
+#uovwxiifoa .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1560,11 +1553,11 @@ drug multiple times, only select the first time.</p>
   vertical-align: top;
 }
 
-#ukofpzrrop .gt_row_group_first td {
+#uovwxiifoa .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ukofpzrrop .gt_summary_row {
+#uovwxiifoa .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1574,16 +1567,16 @@ drug multiple times, only select the first time.</p>
   padding-right: 5px;
 }
 
-#ukofpzrrop .gt_first_summary_row {
+#uovwxiifoa .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ukofpzrrop .gt_first_summary_row.thick {
+#uovwxiifoa .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ukofpzrrop .gt_last_summary_row {
+#uovwxiifoa .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1593,7 +1586,7 @@ drug multiple times, only select the first time.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#ukofpzrrop .gt_grand_summary_row {
+#uovwxiifoa .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1603,7 +1596,7 @@ drug multiple times, only select the first time.</p>
   padding-right: 5px;
 }
 
-#ukofpzrrop .gt_first_grand_summary_row {
+#uovwxiifoa .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1613,11 +1606,11 @@ drug multiple times, only select the first time.</p>
   border-top-color: #D3D3D3;
 }
 
-#ukofpzrrop .gt_striped {
+#uovwxiifoa .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ukofpzrrop .gt_table_body {
+#uovwxiifoa .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1626,7 +1619,7 @@ drug multiple times, only select the first time.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#ukofpzrrop .gt_footnotes {
+#uovwxiifoa .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1640,7 +1633,7 @@ drug multiple times, only select the first time.</p>
   border-right-color: #D3D3D3;
 }
 
-#ukofpzrrop .gt_footnote {
+#uovwxiifoa .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -1649,7 +1642,7 @@ drug multiple times, only select the first time.</p>
   padding-right: 5px;
 }
 
-#ukofpzrrop .gt_sourcenotes {
+#uovwxiifoa .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1663,7 +1656,7 @@ drug multiple times, only select the first time.</p>
   border-right-color: #D3D3D3;
 }
 
-#ukofpzrrop .gt_sourcenote {
+#uovwxiifoa .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1671,80 +1664,73 @@ drug multiple times, only select the first time.</p>
   padding-right: 5px;
 }
 
-#ukofpzrrop .gt_left {
+#uovwxiifoa .gt_left {
   text-align: left;
 }
 
-#ukofpzrrop .gt_center {
+#uovwxiifoa .gt_center {
   text-align: center;
 }
 
-#ukofpzrrop .gt_right {
+#uovwxiifoa .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ukofpzrrop .gt_font_normal {
+#uovwxiifoa .gt_font_normal {
   font-weight: normal;
 }
 
-#ukofpzrrop .gt_font_bold {
+#uovwxiifoa .gt_font_bold {
   font-weight: bold;
 }
 
-#ukofpzrrop .gt_font_italic {
+#uovwxiifoa .gt_font_italic {
   font-style: italic;
 }
 
-#ukofpzrrop .gt_super {
+#uovwxiifoa .gt_super {
   font-size: 65%;
 }
 
-#ukofpzrrop .gt_two_val_uncert {
-  display: inline-block;
-  line-height: 1em;
-  text-align: right;
-  font-size: 60%;
-  vertical-align: -0.25em;
-  margin-left: 0.1em;
-}
-
-#ukofpzrrop .gt_footnote_marks {
+#uovwxiifoa .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#ukofpzrrop .gt_asterisk {
+#uovwxiifoa .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ukofpzrrop .gt_slash_mark {
-  font-size: 0.7em;
-  line-height: 0.7em;
-  vertical-align: 0.15em;
+#uovwxiifoa .gt_indent_1 {
+  text-indent: 5px;
 }
 
-#ukofpzrrop .gt_fraction_numerator {
-  font-size: 0.6em;
-  line-height: 0.6em;
-  vertical-align: 0.45em;
+#uovwxiifoa .gt_indent_2 {
+  text-indent: 10px;
 }
 
-#ukofpzrrop .gt_fraction_denominator {
-  font-size: 0.6em;
-  line-height: 0.6em;
-  vertical-align: -0.05em;
+#uovwxiifoa .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#uovwxiifoa .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#uovwxiifoa .gt_indent_5 {
+  text-indent: 25px;
 }
 </style>
 <table class="gt_table">
   
   <thead class="gt_col_headings">
     <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1"><strong>Characteristic</strong></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>N = 182 Diagnoses</strong><sup class="gt_footnote_marks">1</sup></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col"><strong>Characteristic</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col"><strong>N = 182 Diagnoses</strong><sup class="gt_footnote_marks">1</sup></th>
     </tr>
   </thead>
   <tbody class="gt_table_body">
@@ -1776,16 +1762,16 @@ drug multiple times, only select the first time.</p>
 <td class="gt_row gt_center">49 (27%)</td></tr>
     <tr><td class="gt_row gt_left" style="font-weight: bold;">Histology (ca_hist_adeno_squamous)</td>
 <td class="gt_row gt_center"></td></tr>
-    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;"></td>
-<td class="gt_row gt_center">23 (13%)</td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Adenocarcinoma</td>
-<td class="gt_row gt_center">142 (78%)</td></tr>
+<td class="gt_row gt_center">142 (89%)</td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Carcinoma</td>
-<td class="gt_row gt_center">14 (7.7%)</td></tr>
+<td class="gt_row gt_center">14 (8.8%)</td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Other histologies/mixed tumor</td>
-<td class="gt_row gt_center">2 (1.1%)</td></tr>
+<td class="gt_row gt_center">2 (1.3%)</td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Squamous cell</td>
-<td class="gt_row gt_center">1 (0.5%)</td></tr>
+<td class="gt_row gt_center">1 (0.6%)</td></tr>
+    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Unknown</td>
+<td class="gt_row gt_center">23</td></tr>
   </tbody>
   
   <tfoot class="gt_footnotes">
@@ -1796,12 +1782,12 @@ drug multiple times, only select the first time.</p>
 </table>
 </div>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>nsclc_cisplatin_pem_any<span class="sc">$</span>tbl_drugs</span></code></pre></div>
-<div id="sglthbqnys" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="fhqcyldhpq" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#sglthbqnys .gt_table {
+#fhqcyldhpq .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1826,7 +1812,7 @@ drug multiple times, only select the first time.</p>
   border-left-color: #D3D3D3;
 }
 
-#sglthbqnys .gt_heading {
+#fhqcyldhpq .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1838,7 +1824,7 @@ drug multiple times, only select the first time.</p>
   border-right-color: #D3D3D3;
 }
 
-#sglthbqnys .gt_title {
+#fhqcyldhpq .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1850,7 +1836,7 @@ drug multiple times, only select the first time.</p>
   border-bottom-width: 0;
 }
 
-#sglthbqnys .gt_subtitle {
+#fhqcyldhpq .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1862,13 +1848,13 @@ drug multiple times, only select the first time.</p>
   border-top-width: 0;
 }
 
-#sglthbqnys .gt_bottom_border {
+#fhqcyldhpq .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#sglthbqnys .gt_col_headings {
+#fhqcyldhpq .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1883,7 +1869,7 @@ drug multiple times, only select the first time.</p>
   border-right-color: #D3D3D3;
 }
 
-#sglthbqnys .gt_col_heading {
+#fhqcyldhpq .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1903,7 +1889,7 @@ drug multiple times, only select the first time.</p>
   overflow-x: hidden;
 }
 
-#sglthbqnys .gt_column_spanner_outer {
+#fhqcyldhpq .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1915,15 +1901,15 @@ drug multiple times, only select the first time.</p>
   padding-right: 4px;
 }
 
-#sglthbqnys .gt_column_spanner_outer:first-child {
+#fhqcyldhpq .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#sglthbqnys .gt_column_spanner_outer:last-child {
+#fhqcyldhpq .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#sglthbqnys .gt_column_spanner {
+#fhqcyldhpq .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1935,7 +1921,7 @@ drug multiple times, only select the first time.</p>
   width: 100%;
 }
 
-#sglthbqnys .gt_group_heading {
+#fhqcyldhpq .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1960,7 +1946,7 @@ drug multiple times, only select the first time.</p>
   vertical-align: middle;
 }
 
-#sglthbqnys .gt_empty_group_heading {
+#fhqcyldhpq .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1975,15 +1961,15 @@ drug multiple times, only select the first time.</p>
   vertical-align: middle;
 }
 
-#sglthbqnys .gt_from_md > :first-child {
+#fhqcyldhpq .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#sglthbqnys .gt_from_md > :last-child {
+#fhqcyldhpq .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#sglthbqnys .gt_row {
+#fhqcyldhpq .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2002,7 +1988,7 @@ drug multiple times, only select the first time.</p>
   overflow-x: hidden;
 }
 
-#sglthbqnys .gt_stub {
+#fhqcyldhpq .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2015,7 +2001,7 @@ drug multiple times, only select the first time.</p>
   padding-right: 5px;
 }
 
-#sglthbqnys .gt_stub_row_group {
+#fhqcyldhpq .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2029,11 +2015,11 @@ drug multiple times, only select the first time.</p>
   vertical-align: top;
 }
 
-#sglthbqnys .gt_row_group_first td {
+#fhqcyldhpq .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#sglthbqnys .gt_summary_row {
+#fhqcyldhpq .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2043,16 +2029,16 @@ drug multiple times, only select the first time.</p>
   padding-right: 5px;
 }
 
-#sglthbqnys .gt_first_summary_row {
+#fhqcyldhpq .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#sglthbqnys .gt_first_summary_row.thick {
+#fhqcyldhpq .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#sglthbqnys .gt_last_summary_row {
+#fhqcyldhpq .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2062,7 +2048,7 @@ drug multiple times, only select the first time.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#sglthbqnys .gt_grand_summary_row {
+#fhqcyldhpq .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2072,7 +2058,7 @@ drug multiple times, only select the first time.</p>
   padding-right: 5px;
 }
 
-#sglthbqnys .gt_first_grand_summary_row {
+#fhqcyldhpq .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2082,11 +2068,11 @@ drug multiple times, only select the first time.</p>
   border-top-color: #D3D3D3;
 }
 
-#sglthbqnys .gt_striped {
+#fhqcyldhpq .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#sglthbqnys .gt_table_body {
+#fhqcyldhpq .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2095,7 +2081,7 @@ drug multiple times, only select the first time.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#sglthbqnys .gt_footnotes {
+#fhqcyldhpq .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2109,7 +2095,7 @@ drug multiple times, only select the first time.</p>
   border-right-color: #D3D3D3;
 }
 
-#sglthbqnys .gt_footnote {
+#fhqcyldhpq .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -2118,7 +2104,7 @@ drug multiple times, only select the first time.</p>
   padding-right: 5px;
 }
 
-#sglthbqnys .gt_sourcenotes {
+#fhqcyldhpq .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2132,7 +2118,7 @@ drug multiple times, only select the first time.</p>
   border-right-color: #D3D3D3;
 }
 
-#sglthbqnys .gt_sourcenote {
+#fhqcyldhpq .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2140,80 +2126,73 @@ drug multiple times, only select the first time.</p>
   padding-right: 5px;
 }
 
-#sglthbqnys .gt_left {
+#fhqcyldhpq .gt_left {
   text-align: left;
 }
 
-#sglthbqnys .gt_center {
+#fhqcyldhpq .gt_center {
   text-align: center;
 }
 
-#sglthbqnys .gt_right {
+#fhqcyldhpq .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#sglthbqnys .gt_font_normal {
+#fhqcyldhpq .gt_font_normal {
   font-weight: normal;
 }
 
-#sglthbqnys .gt_font_bold {
+#fhqcyldhpq .gt_font_bold {
   font-weight: bold;
 }
 
-#sglthbqnys .gt_font_italic {
+#fhqcyldhpq .gt_font_italic {
   font-style: italic;
 }
 
-#sglthbqnys .gt_super {
+#fhqcyldhpq .gt_super {
   font-size: 65%;
 }
 
-#sglthbqnys .gt_two_val_uncert {
-  display: inline-block;
-  line-height: 1em;
-  text-align: right;
-  font-size: 60%;
-  vertical-align: -0.25em;
-  margin-left: 0.1em;
-}
-
-#sglthbqnys .gt_footnote_marks {
+#fhqcyldhpq .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#sglthbqnys .gt_asterisk {
+#fhqcyldhpq .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#sglthbqnys .gt_slash_mark {
-  font-size: 0.7em;
-  line-height: 0.7em;
-  vertical-align: 0.15em;
+#fhqcyldhpq .gt_indent_1 {
+  text-indent: 5px;
 }
 
-#sglthbqnys .gt_fraction_numerator {
-  font-size: 0.6em;
-  line-height: 0.6em;
-  vertical-align: 0.45em;
+#fhqcyldhpq .gt_indent_2 {
+  text-indent: 10px;
 }
 
-#sglthbqnys .gt_fraction_denominator {
-  font-size: 0.6em;
-  line-height: 0.6em;
-  vertical-align: -0.05em;
+#fhqcyldhpq .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#fhqcyldhpq .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#fhqcyldhpq .gt_indent_5 {
+  text-indent: 25px;
 }
 </style>
 <table class="gt_table">
   
   <thead class="gt_col_headings">
     <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1"><strong>Characteristic</strong></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>N = 182 Regimens</strong><sup class="gt_footnote_marks">1</sup></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col"><strong>Characteristic</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col"><strong>N = 182 Regimens</strong><sup class="gt_footnote_marks">1</sup></th>
     </tr>
   </thead>
   <tbody class="gt_table_body">
@@ -2245,12 +2224,12 @@ drug multiple times, only select the first time.</p>
 </table>
 </div>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>nsclc_cisplatin_pem_any<span class="sc">$</span>tbl_ngs</span></code></pre></div>
-<div id="ooskqgcuma" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="gksqzatqna" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#ooskqgcuma .gt_table {
+#gksqzatqna .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2275,7 +2254,7 @@ drug multiple times, only select the first time.</p>
   border-left-color: #D3D3D3;
 }
 
-#ooskqgcuma .gt_heading {
+#gksqzatqna .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2287,7 +2266,7 @@ drug multiple times, only select the first time.</p>
   border-right-color: #D3D3D3;
 }
 
-#ooskqgcuma .gt_title {
+#gksqzatqna .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2299,7 +2278,7 @@ drug multiple times, only select the first time.</p>
   border-bottom-width: 0;
 }
 
-#ooskqgcuma .gt_subtitle {
+#gksqzatqna .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2311,13 +2290,13 @@ drug multiple times, only select the first time.</p>
   border-top-width: 0;
 }
 
-#ooskqgcuma .gt_bottom_border {
+#gksqzatqna .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ooskqgcuma .gt_col_headings {
+#gksqzatqna .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2332,7 +2311,7 @@ drug multiple times, only select the first time.</p>
   border-right-color: #D3D3D3;
 }
 
-#ooskqgcuma .gt_col_heading {
+#gksqzatqna .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2352,7 +2331,7 @@ drug multiple times, only select the first time.</p>
   overflow-x: hidden;
 }
 
-#ooskqgcuma .gt_column_spanner_outer {
+#gksqzatqna .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2364,15 +2343,15 @@ drug multiple times, only select the first time.</p>
   padding-right: 4px;
 }
 
-#ooskqgcuma .gt_column_spanner_outer:first-child {
+#gksqzatqna .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ooskqgcuma .gt_column_spanner_outer:last-child {
+#gksqzatqna .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ooskqgcuma .gt_column_spanner {
+#gksqzatqna .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2384,7 +2363,7 @@ drug multiple times, only select the first time.</p>
   width: 100%;
 }
 
-#ooskqgcuma .gt_group_heading {
+#gksqzatqna .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2409,7 +2388,7 @@ drug multiple times, only select the first time.</p>
   vertical-align: middle;
 }
 
-#ooskqgcuma .gt_empty_group_heading {
+#gksqzatqna .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2424,15 +2403,15 @@ drug multiple times, only select the first time.</p>
   vertical-align: middle;
 }
 
-#ooskqgcuma .gt_from_md > :first-child {
+#gksqzatqna .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ooskqgcuma .gt_from_md > :last-child {
+#gksqzatqna .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ooskqgcuma .gt_row {
+#gksqzatqna .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2451,7 +2430,7 @@ drug multiple times, only select the first time.</p>
   overflow-x: hidden;
 }
 
-#ooskqgcuma .gt_stub {
+#gksqzatqna .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2464,7 +2443,7 @@ drug multiple times, only select the first time.</p>
   padding-right: 5px;
 }
 
-#ooskqgcuma .gt_stub_row_group {
+#gksqzatqna .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2478,11 +2457,11 @@ drug multiple times, only select the first time.</p>
   vertical-align: top;
 }
 
-#ooskqgcuma .gt_row_group_first td {
+#gksqzatqna .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ooskqgcuma .gt_summary_row {
+#gksqzatqna .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2492,16 +2471,16 @@ drug multiple times, only select the first time.</p>
   padding-right: 5px;
 }
 
-#ooskqgcuma .gt_first_summary_row {
+#gksqzatqna .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ooskqgcuma .gt_first_summary_row.thick {
+#gksqzatqna .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ooskqgcuma .gt_last_summary_row {
+#gksqzatqna .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2511,7 +2490,7 @@ drug multiple times, only select the first time.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#ooskqgcuma .gt_grand_summary_row {
+#gksqzatqna .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2521,7 +2500,7 @@ drug multiple times, only select the first time.</p>
   padding-right: 5px;
 }
 
-#ooskqgcuma .gt_first_grand_summary_row {
+#gksqzatqna .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2531,11 +2510,11 @@ drug multiple times, only select the first time.</p>
   border-top-color: #D3D3D3;
 }
 
-#ooskqgcuma .gt_striped {
+#gksqzatqna .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ooskqgcuma .gt_table_body {
+#gksqzatqna .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2544,7 +2523,7 @@ drug multiple times, only select the first time.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#ooskqgcuma .gt_footnotes {
+#gksqzatqna .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2558,7 +2537,7 @@ drug multiple times, only select the first time.</p>
   border-right-color: #D3D3D3;
 }
 
-#ooskqgcuma .gt_footnote {
+#gksqzatqna .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -2567,7 +2546,7 @@ drug multiple times, only select the first time.</p>
   padding-right: 5px;
 }
 
-#ooskqgcuma .gt_sourcenotes {
+#gksqzatqna .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2581,7 +2560,7 @@ drug multiple times, only select the first time.</p>
   border-right-color: #D3D3D3;
 }
 
-#ooskqgcuma .gt_sourcenote {
+#gksqzatqna .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2589,80 +2568,73 @@ drug multiple times, only select the first time.</p>
   padding-right: 5px;
 }
 
-#ooskqgcuma .gt_left {
+#gksqzatqna .gt_left {
   text-align: left;
 }
 
-#ooskqgcuma .gt_center {
+#gksqzatqna .gt_center {
   text-align: center;
 }
 
-#ooskqgcuma .gt_right {
+#gksqzatqna .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ooskqgcuma .gt_font_normal {
+#gksqzatqna .gt_font_normal {
   font-weight: normal;
 }
 
-#ooskqgcuma .gt_font_bold {
+#gksqzatqna .gt_font_bold {
   font-weight: bold;
 }
 
-#ooskqgcuma .gt_font_italic {
+#gksqzatqna .gt_font_italic {
   font-style: italic;
 }
 
-#ooskqgcuma .gt_super {
+#gksqzatqna .gt_super {
   font-size: 65%;
 }
 
-#ooskqgcuma .gt_two_val_uncert {
-  display: inline-block;
-  line-height: 1em;
-  text-align: right;
-  font-size: 60%;
-  vertical-align: -0.25em;
-  margin-left: 0.1em;
-}
-
-#ooskqgcuma .gt_footnote_marks {
+#gksqzatqna .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#ooskqgcuma .gt_asterisk {
+#gksqzatqna .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ooskqgcuma .gt_slash_mark {
-  font-size: 0.7em;
-  line-height: 0.7em;
-  vertical-align: 0.15em;
+#gksqzatqna .gt_indent_1 {
+  text-indent: 5px;
 }
 
-#ooskqgcuma .gt_fraction_numerator {
-  font-size: 0.6em;
-  line-height: 0.6em;
-  vertical-align: 0.45em;
+#gksqzatqna .gt_indent_2 {
+  text-indent: 10px;
 }
 
-#ooskqgcuma .gt_fraction_denominator {
-  font-size: 0.6em;
-  line-height: 0.6em;
-  vertical-align: -0.05em;
+#gksqzatqna .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#gksqzatqna .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#gksqzatqna .gt_indent_5 {
+  text-indent: 25px;
 }
 </style>
 <table class="gt_table">
   
   <thead class="gt_col_headings">
     <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1"><strong>Characteristic</strong></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>N = 195 Cancer Panel Tests</strong><sup class="gt_footnote_marks">1</sup></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col"><strong>Characteristic</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col"><strong>N = 195 Cancer Panel Tests</strong><sup class="gt_footnote_marks">1</sup></th>
     </tr>
   </thead>
   <tbody class="gt_table_body">

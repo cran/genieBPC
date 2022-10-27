@@ -31,10 +31,36 @@ returns the 'cohort_ngs' object of the create_analytic_cohort
 with unique genomic samples taken from each patients.
 }
 \description{
-For patients with multiple next generation (NGS) sequencing reports,
-select one unique NGS report per patient based on several potential criteria.
+For patients with multiple associated next generation (NGS) sequencing
+reports, select one unique NGS report per patient for the purpose of creating
+an analytic dataset based on user-defined criterion, including OncoTree code,
+primary vs. metastatic tumor sample, and earliest vs. most recent sample. If
+multiple reports for a patient remain available after the user-defined
+specifications, or if no specifications are provided, the panel with the
+largest number of genes is selected by default. Sample optimization is
+performed in the order that the arguments are specified in the function,
+regardless of the arguments’ order provided by the user. Namely, the OncoTree
+code is prioritized first, sample type is prioritized second and finally the
+time is prioritized last. For patients with exactly one genomic sample, that
+unique genomic sample will be returned regardless of whether it meets the
+user-specified parameters. Running the select_unique_ngs() function will
+ensure that the resulting dataset returned by merging the next generation
+sequencing report data onto the cohort_ca_dx dataset returned by
+create_analytic_cohort() will maintain the structure of cohort_ca_dx (either
+one record per patient or one record per diagnosis). Currently, if multiple
+diagnoses per patient are returned from create_analytic_cohort(), using
+select_unique_ngs() will select a single NGS report per patient. In future
+iterations, this will be updated so that one NGS report per diagnosis can be
+selected.
 }
 \details{
+Note that the NGS dataset serves as the link between the clinical and
+genomic data, where the NGS dataset includes one record per NGS report per
+patient, including the NGS sample ID that is used to link to the genomic
+data files. Merging data from the NGS report onto the analytic cohort
+returned from create_analytic_cohort() therefore allows users to utilize all
+clinical and genomic data available.
+
 See the
 \href{https://genie-bpc.github.io/genieBPC/articles/select_unique_ngs_vignette.html}{select_unique_ngs vignette}
 for further documentation and examples.
@@ -55,9 +81,7 @@ ex1 <- create_analytic_cohort(
 # select unique next generation sequencing reports for those patients
 samples_data1 <- select_unique_ngs(
   data_cohort = ex1$cohort_ngs,
-  oncotree_code = "LUAD",
-  sample_type = "Metastasis",
-  min_max_time = "max"
+  sample_type = "Primary"
 )
 
 # Example 2 ----------------------------------
@@ -76,9 +100,12 @@ ex2 <- create_analytic_cohort(
 
 samples_data2 <- select_unique_ngs(
   data_cohort = ex2$cohort_ngs,
-  oncotree_code = "LUAD",
+  oncotree_code = "NSCLCPD",
   sample_type = "Metastasis",
   min_max_time = "max"
 )
 \dontshow{\}) # examplesIf}
+}
+\author{
+Karissa Whiting
 }

@@ -1,32 +1,9 @@
 #' Obtain clinical & genomic data files for GENIE BPC Project
 #'
-#' The `pull_data_synapse` function accesses the specified
-#'  version of the clinical and genomic GENIE BPC data from
+#' Function to access specified
+#'  versions of clinical and genomic GENIE BPC data from
 #'  \href{https://www.synapse.org/#!Synapse:syn21226493/wiki/599164}{Synapse}
-#'  and reads it into the R environment.
-#'   Documentation corresponding to the clinical data files
-#'   can also be found on 'Synapse' in the Analytic Data Guide:
-#' \itemize{
-#'   \item \href{https://www.synapse.org/#!Synapse:syn23002641}{NSCLC v1.1-Consortium Analytic Data Guide}
-#'   \item \href{https://www.synapse.org/#!Synapse:syn26008058}{NSCLC v2.1-Consortium Analytic Data Guide}
-#'   \item \href{https://www.synapse.org/#!Synapse:syn30557304}{NSCLC v2.0-Public Analytic Data Guide}
-#'   \item \href{https://www.synapse.org/#!Synapse:syn23764204}{CRC v1.1-Consortium Analytic Data Guide}
-#'   \item \href{https://www.synapse.org/#!Synapse:syn26077308}{CRC v1.2-Consortium Analytic Data Guide}
-#'   \item \href{https://www.synapse.org/#!Synapse:syn26077313}{BrCa v1.1-Consortium Analytic Data Guide}
-#' }
-#' Users must log in to 'Synapse' to access the data successfully.
-#' To set your 'Synapse' credentials during each session, call:
-#' `set_synapse_credentials(username = "your_username", password = "your_password")`
-#' To store authentication information in your environmental variables, add the
-#' following to your .Renviron file (tip: you can use usethis::edit_r_environ()
-#' to easily open/edit this file):
-#' `SYNAPSE_USERNAME = <your-username>`
-#' `SYNAPSE_PASSWORD = <your-password>`
-#' Alternatively, you can pass your username and password to each individual
-#' data pull function if preferred, although it is recommended that you manage
-#' your passwords outside of your scripts for security purposes.
-#'
-#' See the \href{https://genie-bpc.github.io/genieBPC/articles/pull_data_synapse_vignette.html}{pull_data_synapse vignette}
+#'  and read them into the R environment. See the \href{https://genie-bpc.github.io/genieBPC/articles/pull_data_synapse_vignette.html}{pull_data_synapse vignette}
 #' for further documentation and examples.
 #'
 #' @param cohort Vector or list specifying the cohort(s) of interest. Must be
@@ -45,6 +22,43 @@
 #'   specified, data are not read into the R environment.
 #' @param username 'Synapse' username
 #' @param password 'Synapse' password
+#'
+#' @section Authentication:
+#' To access data, users must have a valid 'Synapse' account with permission to
+#' access the data set and they must have accepted any necessary 'Terms of Use'.
+#' Users must always authenticate themselves in their current R session.
+#' (see \href{https://genie-bpc.github.io/genieBPC/articles/pull_data_synapse_vignette.html}{README: Data Access and Authentication}
+#'
+#' for details).
+#' To set your 'Synapse' credentials during each session, call:
+#'
+#' `set_synapse_credentials(username = "your_username", password = "your_password")`
+#'
+#' If your credentials are stored as environmental variables, you do not need to
+#' call `set_synapse_credentials()` explicitly each session. To store
+#' authentication information in your environmental variables, add the following
+#' to your .Renviron file, then restart your R session ' (tip: you can use
+#' `usethis::edit_r_environ()` to easily open/edit this file):
+#'
+#' \itemize{
+#'    \item `SYNAPSE_USERNAME = <your-username>`
+#'    \item `SYNAPSE_PASSWORD = <your-password>`
+#'    }
+#' Alternatively, you can pass your username and password to each individual
+#' data pull function if preferred, although it is recommended that you manage
+#' your passwords outside of your scripts for security purposes.
+#'
+#' @section Analytic Data Guides:
+#'   Documentation corresponding to the clinical data files
+#'   can be found on 'Synapse' in the Analytic Data Guides:
+#' \itemize{
+#'   \item \href{https://www.synapse.org/#!Synapse:syn23002641}{NSCLC v1.1-Consortium Analytic Data Guide}
+#'   \item \href{https://www.synapse.org/#!Synapse:syn26008058}{NSCLC v2.1-Consortium Analytic Data Guide}
+#'   \item \href{https://www.synapse.org/#!Synapse:syn30557304}{NSCLC v2.0-Public Analytic Data Guide}
+#'   \item \href{https://www.synapse.org/#!Synapse:syn23764204}{CRC v1.1-Consortium Analytic Data Guide}
+#'   \item \href{https://www.synapse.org/#!Synapse:syn26077308}{CRC v1.2-Consortium Analytic Data Guide}
+#'   \item \href{https://www.synapse.org/#!Synapse:syn26077313}{BrCa v1.1-Consortium Analytic Data Guide}
+#' }
 #'
 #' @return Returns a nested list of clinical and genomic data corresponding to
 #' the specified cohort(s).
@@ -94,11 +108,12 @@ pull_data_synapse <- function(cohort = NULL, version = NULL,
   version <- version %>%
     purrr::when(
       is.null(.) ~ cli::cli_abort("Version needs to be specified.
-                            Use {.code synapse_version()} to see what data is available."),
+                Use {.code synapse_version()} to see what data is available."),
       setdiff(., unique(synapse_tables$version)) > 0 ~
         cli::cli_abort("{.code version} must be one of the following:
                        {unique(synapse_tables$version)}"),
-      length(select_cohort) < length(.) ~ cli::cli_abort("You have selected more versions than cancer cohorts.
+      length(select_cohort) < length(.) ~ cli::cli_abort(
+        "You have selected more versions than cancer cohorts.
              Make sure cohort and version inputs have the same length.
          Use {.code synapse_version()} to see what data is available"),
       TRUE ~ rlang::arg_match(., unique(synapse_tables$version),
@@ -106,7 +121,7 @@ pull_data_synapse <- function(cohort = NULL, version = NULL,
     )
 
   # create `version-number` ---
-  sv <- dplyr::select(genieBPC::synapse_tables, .data$cohort, .data$version) %>%
+  sv <- dplyr::select(genieBPC::synapse_tables, "cohort", "version") %>%
     dplyr::distinct()
 
   version_num <- dplyr::bind_cols(list("cohort" = select_cohort,
@@ -116,7 +131,9 @@ pull_data_synapse <- function(cohort = NULL, version = NULL,
                                             by = c("cohort", "version"))
 
   if (nrow(version_not_available) > 0) {
-    cli::cli_abort(c("You have selected a version that is not available for this cohort (use `synapse_tables` to see what versions are available):",
+    cli::cli_abort(c("You have selected a version that is not available for
+                     this cohort (use `synapse_tables` to see what versions
+                     are available):",
       "x" = "{.val {version_not_available}}"
     ))
   }
@@ -255,13 +272,13 @@ pull_data_synapse <- function(cohort = NULL, version = NULL,
 
   # file index- files must being csv or txt
   ids_txt_csv <- file_metadata %>%
-    tidyr::unnest(cols = .data$file_info) %>%
+    tidyr::unnest(cols = "file_info") %>%
     filter(.data$type %in% c("text/csv", "text/plain"))
 
   files <- ids_txt_csv %>%
     dplyr::select(
-      .data$version_num, .data$file_handle_id, .data$synapse_id, .data$df,
-      .data$name, .data$download_folder
+      "version_num", "file_handle_id", "synapse_id", "df",
+      "name", "download_folder"
     ) %>%
     purrr::pmap(
       ., .get_and_query_file_url, download_location,
@@ -372,10 +389,12 @@ pull_data_synapse <- function(cohort = NULL, version = NULL,
   if (is.null(download_location)) {
     returned_files <- file_type %>%
       purrr::when(
-        . == "text/csv" ~ read.csv(resolved_file_path),
-        . == "text/plain" ~ utils::read.delim(resolved_file_path, sep = "\t"),
+        . == "text/csv" ~ read.csv(resolved_file_path, na.strings = ""),
+        . == "text/plain" ~ utils::read.delim(resolved_file_path, sep = "\t",
+                                              na.strings = ""),
         TRUE ~ cli::cli_abort(
-          "Cannot read objects of type {file_type}. Try downloading directly to disk with {.code download_location}")
+          "Cannot read objects of type {file_type}.
+          Try downloading directly to disk with {.code download_location}")
       )
 
     cli::cli_alert_success(

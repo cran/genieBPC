@@ -1,7 +1,7 @@
 Type: Package
 Package: genieBPC
 Title: Project GENIE BioPharma Collaborative Data Processing Pipeline
-Version: 1.0.0
+Version: 1.0.1
 Authors@R: 
     c(
     person(given = "Jessica A.",
@@ -54,11 +54,11 @@ VignetteBuilder: knitr
 Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: TRUE
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.1
 URL: https://genie-bpc.github.io/genieBPC/
 Language: en-US
 NeedsCompilation: no
-Packaged: 2022-08-11 13:07:49 UTC; laveryj
+Packaged: 2022-10-27 14:27:52 UTC; laveryj
 Author: Jessica A. Lavery [aut, cre] (<https://orcid.org/0000-0002-2746-5647>),
   Michael A. Curry [aut] (<https://orcid.org/0000-0002-0261-4044>),
   Samantha Brown [aut] (<https://orcid.org/0000-0001-5352-974X>),
@@ -67,4 +67,4 @@ Author: Jessica A. Lavery [aut, cre] (<https://orcid.org/0000-0002-2746-5647>),
   Daniel D. Sjoberg [ctb] (<https://orcid.org/0000-0003-0862-2018>)
 Maintainer: Jessica A. Lavery <laveryj@mskcc.org>
 Repository: CRAN
-Date/Publication: 2022-08-14 07:30:02 UTC
+Date/Publication: 2022-10-27 14:45:08 UTC

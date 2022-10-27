@@ -1,6 +1,27 @@
+# genieBPC 1.0.1
+
+* Updates to `select_unique_ngs()` documentation and vignettes, as well as
+clarification of the messaging returned when the function is run (#57)
+
+* Update selecting functions to account for `tidyselect` v1.2.0 release 
+(issue #83)
+
+* Documentation updates following Bioinformatics reviewer comments (issue #75)
+
+* Update `drug_regimen_sunburst()` to pass additional arguments to
+`sunburstR::sunburst()` (issue #71)
+
+* Added CRAN installation instructions to README (issue #72)
+
+* Add CRAN badge to README (issue #69)
+
+* Update handling of missing data when reading in csv files in
+`pull_data_synapse()` so that missing data is stored as NA and not as "" (issue
+#73).
+
 # genieBPC 1.0.0
 
-* changed `print()` to `message()` in `select_unique_ngs()`
+* Changed `print()` to `message()` in `select_unique_ngs()`
 
 * Removed `TramineR` from dependencies file (issue #50)
 

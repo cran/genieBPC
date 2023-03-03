@@ -44,20 +44,20 @@ remotes::install_github("GENIE-BPC/genieBPC")
 
 ## Overview of {genieBPC} Functions
 
--   **Data import:** `pull_data_synapse()` imports GENIE BPC data from
-    ‘Synapse’ into the R environment
+- **Data import:** `pull_data_synapse()` imports GENIE BPC data from
+  ‘Synapse’ into the R environment
 
--   **Data processing**
+- **Data processing**
 
-    -   `create_analytic_cohort()` selects an analytic cohort based on
-        cancer diagnosis information and/or cancer-directed drug regimen
-        information  
-    -   `select_unique_ngs()` selects a unique next generation
-        sequencing (NGS) test corresponding to the selected diagnoses
+  - `create_analytic_cohort()` selects an analytic cohort based on
+    cancer diagnosis information and/or cancer-directed drug regimen
+    information  
+  - `select_unique_ngs()` selects a unique next generation sequencing
+    (NGS) test corresponding to the selected diagnoses
 
--   **Data visualization:** `drug_regimen_sunburst()` creates a sunburst
-    figure of drug regimen information corresponding to the selected
-    diagnoses in the order that the regimens were administered
+- **Data visualization:** `drug_regimen_sunburst()` creates a sunburst
+  figure of drug regimen information corresponding to the selected
+  diagnoses in the order that the regimens were administered
 
 ## Data Access & Authentication
 
@@ -115,28 +115,50 @@ its corresponding variables for each data release.
 
 **Public Data Releases**
 
--   [NSCLC v2.0-Public Analytic Data
-    Guide](https://www.synapse.org/#!Synapse:syn30557304) *Released May
-    2022*
+- [NSCLC v2.0-Public Analytic Data
+  Guide](https://www.synapse.org/#!Synapse:syn30557304) *Released May
+  2022*
+
+- [CRC v2.0-Public Analytic Data
+  Guide](https://www.synapse.org/#!Synapse:syn31751466) *Released August
+  2022*
 
 **Consortium Data Releases**  
 *Note that only GENIE BPC consortium users have access to the consortium
 releases.*
 
--   [NSCLC v1.1-Consortium Analytic Data
-    Guide](https://www.synapse.org/#!Synapse:syn23002641)
+- [NSCLC v1.1-Consortium Analytic Data
+  Guide](https://www.synapse.org/#!Synapse:syn23002641)
 
--   [NSCLC v2.1-Consortium Analytic Data
-    Guide](https://www.synapse.org/#!Synapse:syn26008058)
+- [NSCLC v2.1-Consortium Analytic Data
+  Guide](https://www.synapse.org/#!Synapse:syn26008058)
 
--   [CRC v1.1-Consortium Analytic Data
-    Guide](https://www.synapse.org/#!Synapse:syn23764204)
+- [CRC v1.1-Consortium Analytic Data
+  Guide](https://www.synapse.org/#!Synapse:syn23764204)
 
--   [CRC v1.2-Consortium Analytic Data
-    Guide](https://www.synapse.org/#!Synapse:syn26077308)
+- [CRC v1.2-Consortium Analytic Data
+  Guide](https://www.synapse.org/#!Synapse:syn26077308)
 
--   [BrCa v1.1-Consortium Analytic Data
-    Guide](https://www.synapse.org/#!Synapse:syn26077313)
+- [BrCa v1.1-Consortium Analytic Data
+  Guide](https://www.synapse.org/#!Synapse:syn26077313)
+
+- [BrCa v1.2-Consortium Analytic Data
+  Guide](https://www.synapse.org/#!Synapse:syn32330194)
+
+- [PANC v1.1-Consortium Analytic Data
+  Guide](https://www.synapse.org/#!Synapse:syn29787285)
+
+- [PANC v1.2-Consortium Analytic Data
+  Guide](https://www.synapse.org/#!Synapse:syn50612821)
+
+- [BLADDER v1.1-Consortium Analytic Data
+  Guide](https://www.synapse.org/#!Synapse:syn30787692)
+
+- [Prostate v1.1-Consortium Analytic Data
+  Guide](https://www.synapse.org/#!Synapse:syn30148714)
+
+- [Prostate v1.2-Consortium Analytic Data
+  Guide](https://www.synapse.org/#!Synapse:syn50612204)
 
 ## Example
 
@@ -178,3 +200,32 @@ sunplot <- drug_regimen_sunburst(data_synapse = nsclc_2_0$NSCLC_v2.0,
 the first treatment regimen:*
 
 # <img src="man/figures/genieBPC_sunburst2.png" height="400" /></a>
+
+## GENIE BPC Publications
+
+Lavery JA, Lepisto EM, Brown S, Rizvi H, McCarthy C, LeNoue-Newton M, Yu
+C, Lee J, Guo X, Yu T, Rudolph J, Sweeney S; AACR Project GENIE
+Consortium, Park BH, Warner JL, Bedard PL, Riely G, Schrag D, Panageas
+KS. [A Scalable Quality Assurance Process for Curating Oncology
+Electronic Health Records: The Project GENIE Biopharma Collaborative
+Approach.](https://ascopubs.org/doi/full/10.1200/CCI.21.00105) JCO Clin
+Cancer Inform. 2022 Feb;6:e2100105. doi: 10.1200/CCI.21.00105. PMID:
+35192403; PMCID: PMC8863125.
+
+Brown S, Lavery JA, Shen R, Martin AS, Kehl KL, Sweeney SM, Lepisto EM,
+Rizvi H, McCarthy CG, Schultz N, Warner JL, Park BH, Bedard PL, Riely
+GJ, Schrag D, Panageas KS; AACR Project GENIE Consortium. [Implications
+of Selection Bias Due to Delayed Study Entry in Clinical Genomic
+Studies.](https://jamanetwork.com/journals/jamaoncology/fullarticle/2785693)
+JAMA Oncol. 2022 Feb 1;8(2):287-291. doi: 10.1001/jamaoncol.2021.5153.
+PMID: 34734967; PMCID: PMC9190030.
+
+Kehl KL, Riely GJ, Lepisto EM, Lavery JA, Warner JL, LeNoue-Newton ML,
+Sweeney SM, Rudolph JE, Brown S, Yu C, Bedard PL, Schrag D, Panageas KS;
+American Association of Cancer Research (AACR) Project Genomics Evidence
+Neoplasia Information Exchange (GENIE) Consortium. [Correlation Between
+Surrogate End Points and Overall Survival in a Multi-institutional
+Clinicogenomic Cohort of Patients With Non-Small Cell Lung or Colorectal
+Cancer.](https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2782339)
+JAMA Netw Open. 2021 Jul 1;4(7):e2117547. doi:
+10.1001/jamanetworkopen.2021.17547. PMID: 34309669; PMCID: PMC8314138.

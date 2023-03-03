@@ -24,7 +24,7 @@
 #' patients with 1 index cancer and will return the first AND second index
 #' cancers to patients with multiple.
 #' @param institution GENIE BPC participating institution. Must be one of
-#' "DFCI", "MSK", "UHN", or "VICC" for NSCLC cohorts; must be one of "DFCI",
+#' "DFCI", "MSK", "UHN", or "VICC" for NSCLC, BLADDER, Prostate, and PANC cohorts; must be one of "DFCI",
 #' "MSK", "VICC" for CRC and BrCa. Default selection is all institutions.
 #' This parameter corresponds to the variable `institution` in the
 #' Analytic Data Guide.
@@ -215,13 +215,13 @@ create_analytic_cohort <- function(data_synapse,
   # participating institutions by cohort
   if (sum(
     !missing(institution),
-    grepl("^NSCLC$", stringr::str_to_upper(cohort_temp)) > 0
+    grepl("^NSCLC$|^PANC$|^BLADDER$", stringr::str_to_upper(cohort_temp)) > 0
   ) > 1) {
     if (sum(!grepl(
       c("^DFCI$|^MSK$|^VICC$|^UHN$"),
       stringr::str_to_upper(institution)
     ) > 0) > 0) {
-      stop("Select from available participating institutions. For NSCLC, the
+      stop("Select from available participating institutions. For NSCLC/PANC/BLADDER, the
            participating institutions were DFCI, MSK, UHN and VICC.")
     }
   }
@@ -232,12 +232,12 @@ create_analytic_cohort <- function(data_synapse,
   ) > 0) > 1) {
     if (sum(!grepl(c("^DFCI$|^MSK$|^VICC$"), stringr::str_to_upper(institution))
     > 0) > 0) {
-      stop("Select from available participating institutions. For CRC, the
+      stop("Select from available participating institutions. For CRC/BrCa, the
            participating institutions were DFCI, MSK and VICC.")
     }
   }
 
-  if (missing(institution) & stringr::str_to_upper(cohort_temp) == "NSCLC") {
+  if (missing(institution) & stringr::str_to_upper(cohort_temp) %in% c("NSCLC", "PANC", "BLADDER", "Prostate")) {
     institution_temp <- c("DFCI", "MSK", "UHN", "VICC")
   } else if (missing(institution) &
     stringr::str_to_upper(cohort_temp) %in% c("CRC", "BRCA")) {
@@ -729,13 +729,39 @@ create_analytic_cohort <- function(data_synapse,
     )
   }
 
-
   # cancer panel test information
-  cohort_ngs <- fetch_samples(
-    cohort = cohort_temp,
-    data_synapse = data_synapse,
-    df_record_ids = cohort_ca_dx
-  )
+  # keep records based on record_id + cancer sequence of interest
+  cohort_ngs <- dplyr::inner_join(
+    cohort_ca_dx %>%
+      dplyr::select("cohort", "record_id", "ca_seq"),
+    pluck(data_synapse, "cpt"),
+    by = c("cohort", "record_id", "ca_seq")
+  ) %>%
+    distinct()
+
+  if(any(names(cohort_ngs) == "cpt_sample_type") &
+     !any(names(cohort_ngs) == "sample_type")){
+
+    cohort_ngs <- cohort_ngs %>%
+      dplyr::mutate(sample_type = case_when(
+        str_to_lower(.data$cpt_sample_type)
+        %in% c("1", "primary", "primary tumor") ~ "Primary tumor",
+        str_to_lower(.data$cpt_sample_type)
+        %in% c("2", "lymph node metastasis") ~ "Lymph node metastasis",
+        str_to_lower(.data$cpt_sample_type)
+        %in% c("3", "distant organ metastasis") ~ "Distant organ metastasis",
+        str_to_lower(.data$cpt_sample_type)
+        %in% c("4", "metastasis site unspecified", "metastatic recurrence") ~
+          "Metastasis site unspecified",
+        str_to_lower(.data$cpt_sample_type)
+        %in% c("5", "local recurrence") ~ "Local recurrence",
+        str_to_lower(.data$cpt_sample_type)
+        %in% c("6", "unspecified") ~ as.character(NA),
+        str_to_lower(.data$cpt_sample_type)
+        %in% c("7", "not applicable or hematologic malignancy") ~
+          "Not applicable or hematologic malignancy"
+      ))
+  }
 
   # genomic sequencing information
   if (!is.null(pluck(data_synapse, "fusions"))) {

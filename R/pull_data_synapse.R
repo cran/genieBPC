@@ -8,7 +8,8 @@
 #'
 #' @param cohort Vector or list specifying the cohort(s) of interest. Must be
 #'   one of "NSCLC" (Non-Small Cell Lung Cancer), "CRC" (Colorectal Cancer), or
-#'   "BrCa" (Breast Cancer).
+#'   "BrCa" (Breast Cancer), "PANC" (Pancreatic Cancer), "Prostate" (Prostate Cancer),
+#'   and "BLADDER" (Bladder Cancer).
 #' @param version Vector specifying the version of the data. Must be one of the
 #'   following: "v1.1-consortium", "v1.2-consortium", "v2.1-consortium",
 #'   "v2.0-public". When entering multiple cohorts, the order of the version
@@ -57,7 +58,14 @@
 #'   \item \href{https://www.synapse.org/#!Synapse:syn30557304}{NSCLC v2.0-Public Analytic Data Guide}
 #'   \item \href{https://www.synapse.org/#!Synapse:syn23764204}{CRC v1.1-Consortium Analytic Data Guide}
 #'   \item \href{https://www.synapse.org/#!Synapse:syn26077308}{CRC v1.2-Consortium Analytic Data Guide}
+#'   \item \href{https://www.synapse.org/#!Synapse:syn31751466}{CRC v2.0-Public Analytic Data Guide}
 #'   \item \href{https://www.synapse.org/#!Synapse:syn26077313}{BrCa v1.1-Consortium Analytic Data Guide}
+#'   \item \href{https://www.synapse.org/#!Synapse:syn32330194}{BrCa v1.2-Consortium Analytic Data Guide}
+#'   \item \href{https://www.synapse.org/#!Synapse:syn30787692}{BLADDER v1.1-Consortium Analytic Data Guide}
+#'   \item \href{https://www.synapse.org/#!Synapse:syn29787285}{PANC v1.1-Consortium Analytic Data Guide}
+#'   \item \href{https://www.synapse.org/#!Synapse:syn50612821}{PANC v1.2-Consortium Analytic Data Guide}
+#'   \item \href{https://www.synapse.org/#!Synapse:syn30148714}{Prostate v1.1-Consortium Analytic Data Guide}
+#'   \item \href{https://www.synapse.org/#!Synapse:syn50612204}{Prostate v1.2-Consortium Analytic Data Guide}
 #' }
 #'
 #' @return Returns a nested list of clinical and genomic data corresponding to
@@ -100,25 +108,35 @@ pull_data_synapse <- function(cohort = NULL, version = NULL,
   token <- .get_synapse_token(username = username, password = password)
 
   # get `cohort` ---
-  select_cohort <- rlang::arg_match(cohort, c("NSCLC", "CRC", "BrCa"),
+  select_cohort <- rlang::arg_match(cohort, c("NSCLC", "CRC", "BrCa", "BLADDER", "PANC", "Prostate"),
     multiple = TRUE
   )
 
   # check `version` ---
-  version <- version %>%
-    purrr::when(
-      is.null(.) ~ cli::cli_abort("Version needs to be specified.
-                Use {.code synapse_version()} to see what data is available."),
-      setdiff(., unique(synapse_tables$version)) > 0 ~
-        cli::cli_abort("{.code version} must be one of the following:
-                       {unique(synapse_tables$version)}"),
-      length(select_cohort) < length(.) ~ cli::cli_abort(
+
+  if(is.null(version)){
+
+    cli::cli_abort("Version needs to be specified.
+                Use {.code synapse_version()} to see what data is available.")
+
+  } else if (length(setdiff(version, unique(genieBPC::synapse_tables$version))) > 0){
+
+    cli::cli_abort("{.code version} must be one of the following:
+                       {unique(synapse_tables$version)}")
+
+  } else if (length(select_cohort) < length(version)){
+
+    cli::cli_abort(
         "You have selected more versions than cancer cohorts.
              Make sure cohort and version inputs have the same length.
-         Use {.code synapse_version()} to see what data is available"),
-      TRUE ~ rlang::arg_match(., unique(synapse_tables$version),
+         Use {.code synapse_version()} to see what data is available")
+
+  } else {
+
+    rlang::arg_match(version, unique(genieBPC::synapse_tables$version),
                               multiple = TRUE)
-    )
+
+  }
 
   # create `version-number` ---
   sv <- dplyr::select(genieBPC::synapse_tables, "cohort", "version") %>%
@@ -387,15 +405,22 @@ pull_data_synapse <- function(cohort = NULL, version = NULL,
 
   # `download_location` from outside function
   if (is.null(download_location)) {
-    returned_files <- file_type %>%
-      purrr::when(
-        . == "text/csv" ~ read.csv(resolved_file_path, na.strings = ""),
-        . == "text/plain" ~ utils::read.delim(resolved_file_path, sep = "\t",
-                                              na.strings = ""),
-        TRUE ~ cli::cli_abort(
+
+    if (file_type == "text/csv"){
+
+      returned_files <- utils::read.csv(resolved_file_path,
+                                        na.strings = c("", "NA"))
+
+    } else if (file_type == "text/plain") {
+
+      returned_files <- utils::read.delim(resolved_file_path, sep = "\t",
+                                          na.strings = c("", "NA"))
+
+    } else {
+      cli::cli_abort(
           "Cannot read objects of type {file_type}.
           Try downloading directly to disk with {.code download_location}")
-      )
+    }
 
     cli::cli_alert_success(
       "{.field {df}} has been imported for {.val {version_num}}")

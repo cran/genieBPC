@@ -212,21 +212,20 @@ create_analytic_cohort <- function(data_synapse,
          one patient is ", max_index_ca, "."
     ))
   }
+
   # participating institutions by cohort
   if (sum(
     !missing(institution),
-    grepl("^NSCLC$|^PANC$|^BLADDER$", stringr::str_to_upper(cohort_temp)) > 0
+    grepl("^NSCLC$|^PANC$|^BLADDER$|^PROSTATE$", stringr::str_to_upper(cohort_temp)) > 0
   ) > 1) {
     if (sum(!grepl(
       c("^DFCI$|^MSK$|^VICC$|^UHN$"),
       stringr::str_to_upper(institution)
     ) > 0) > 0) {
-      stop("Select from available participating institutions. For NSCLC/PANC/BLADDER, the
+      stop("Select from available participating institutions. For NSCLC/PANC/BLADDER/Prostate, the
            participating institutions were DFCI, MSK, UHN and VICC.")
     }
-  }
-
-  if (sum(!missing(institution), grepl(
+  } else if (sum(!missing(institution), grepl(
     "^CRC$|^BRCA$",
     stringr::str_to_upper(cohort_temp)
   ) > 0) > 1) {
@@ -237,7 +236,8 @@ create_analytic_cohort <- function(data_synapse,
     }
   }
 
-  if (missing(institution) & stringr::str_to_upper(cohort_temp) %in% c("NSCLC", "PANC", "BLADDER", "Prostate")) {
+  if (missing(institution) & stringr::str_to_upper(cohort_temp) %in%
+      stringr::str_to_upper(c("NSCLC", "PANC", "BLADDER", "PROSTATE"))) {
     institution_temp <- c("DFCI", "MSK", "UHN", "VICC")
   } else if (missing(institution) &
     stringr::str_to_upper(cohort_temp) %in% c("CRC", "BRCA")) {
@@ -729,6 +729,15 @@ create_analytic_cohort <- function(data_synapse,
     )
   }
 
+  # RT (if applicable)
+  if (!is.null(pluck(data_synapse, "ca_radtx"))) {
+    cohort_ca_radtx <- dplyr::inner_join(cohort_ca_dx %>%
+                                               dplyr::select("cohort", "record_id", "ca_seq"),
+                                             pluck(data_synapse, "ca_radtx"),
+                                             by = c("cohort", "record_id", "ca_seq")
+    )
+  }
+
   # cancer panel test information
   # keep records based on record_id + cancer sequence of interest
   cohort_ngs <- dplyr::inner_join(
@@ -950,7 +959,7 @@ create_analytic_cohort <- function(data_synapse,
   df_order <- c(
     "cohort_pt_char", "cohort_ca_dx",
     "cohort_ca_dx_non_index",
-    "cohort_ca_rad_tx", "cohort_ca_drugs",
+    "cohort_ca_radtx", "cohort_ca_drugs",
     "cohort_prissmm_imaging", "cohort_prissmm_pathology",
     "cohort_prissmm_md", "cohort_tumor_marker",
     "cohort_ngs",

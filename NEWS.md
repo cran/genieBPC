@@ -1,7 +1,39 @@
-# genieBPC 1.1.0
+# genieBPC 1.1.1
 
-* Add PANC v1.1-consortium, Prostate v1.1-consortium, BrCa 1.2-consortium, PANC
-v1.2-consortium, Prostate v1.2-consortium, CRC 2.0-public data releases
+* Updated code for default institution in `create_analytic_cohort()` to fix bug if the `cohort` = "Prostate" (#130)
+
+* Add 'cohort' parameter to `synapse_version()` to enable the user to subset by cohort(s) of interest
+
+* Updated `genieBPC::nsclc_test_data` to ensure unique sample ids for CNA file.
+
+* Updated `genieBPC::nsclc_test_data` to randomly sample from cancer diagnosis dataset, stratified by stage, and incorporate genomic data into dataset.
+
+* Updated README and 'Pull Data Synapse Vignette' to clarify instructions for registering for a 'Synapse' account (#100, #105)
+
+* Add publications (#96, #110)
+
+* Add information about genomic differences between genomic data downloaded from cBioPortal versus Synapse (#92)
+
+* Update tests to test across all data releases (#56)
+
+* Fix bug related to radiation therapy data not being returned in `create_analytic_cohort()` 
+
+### Data Release Updates
+
+* Added **BLADDER v1.2-consortium** release
+
+* Added **NSCLC 2.3-consortium** release
+
+* Added **CRC v1.3-consortium** release
+
+* Removed **NSCLC 2.1-consortium** release - Due to the inadvertent inclusion of data indicative of ages over 89 for data associated with the Project GENIE BioPharma Collaborative, this release was replaced with the **NSCLC 2.3-consortium** release. 
+
+* Removed **CRC v1.1-consortium** release - Due to the inadvertent inclusion of data indicative of ages over 89 for data associated with the Project GENIE BioPharma Collaborative, this release was replaced with the newly added **CRC v1.3-consortium** release. 
+
+* Removed **CRC v1.2-consortium** release - Due to the inadvertent inclusion of data indicative of ages over 89 for data associated with the Project GENIE BioPharma Collaborative, this release was replaced with the newly added **CRC v1.3-consortium** release. 
+
+
+# genieBPC 1.1.0
 
 * Removed `fetch_samples()` function (#91)
 
@@ -11,6 +43,21 @@ v1.2-consortium, Prostate v1.2-consortium, CRC 2.0-public data releases
 `pull_data_synapse()`
 
 * Added citations & links to GENIE BPC publications to README
+
+### Data Release Updates
+
+* Added **PANC v1.1-consortium** release
+
+* Added **Prostate v1.1-consortium** release
+
+* Added **BrCa 1.2-consortium** release
+
+* Added **PANC v1.2-consortium** release
+
+* Added **Prostate v1.2-consortium** release
+
+* Added **CRC 2.0-public** release
+
 
 # genieBPC 1.0.1
 
@@ -39,8 +86,6 @@ clarification of the messaging returned when the function is run (#57)
 
 * Removed `TramineR` from dependencies file (issue #50)
 
-* Incorporated the most recent public and consortium data releases (issue #42)
-
 * Removed `synapser` from dependencies file (issue #45)
 
 * Fixed `cpt_sample_type`/`sample_type` issue in `fetch_samples.R` (issue #43)
@@ -53,6 +98,11 @@ pass the CRAN checks.
 * Added drug names for breast cancer cohort
 
 * Update examples to use test data, when possible
+
+### Data Release Updates
+
+* Incorporated the most recent public and consortium data releases (issue #42)
+
 
 # genieBPC 0.1.0
 

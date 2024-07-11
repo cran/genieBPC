@@ -314,7 +314,7 @@ known alive date, and number of pathology reports, imaging reports,
 medical oncologist assessments, along with many other demographic and
 vital status variables.</p>
 <p>The Patient Characteristics dataset can be linked to all other
-datasets using <code>record_id</code>.</p>
+datasets using <code>cohort</code> and <code>record_id</code>.</p>
 </div>
 <div id="cancer-diagnosis" class="section level3">
 <h3>Cancer Diagnosis</h3>
@@ -357,12 +357,13 @@ Project cancer diagnosis, per patient.</p>
 following datasets:</p>
 <ul>
 <li><p>Cancer-Directed Regimen dataset using variables
+<code>cohort</code>, <code>record_id</code> and
+<code>ca_seq</code></p></li>
+<li><p>Cancer Panel Test dataset using variables <code>cohort</code>,
 <code>record_id</code> and <code>ca_seq</code></p></li>
-<li><p>Cancer Panel Test dataset using variables <code>record_id</code>
-and <code>ca_seq</code></p></li>
 <li><p>Patient Characteristics, PRISSMM Pathology, PRISSMM Imaging, and
-PRISSMM Medical Oncologist Assessment datasets using
-<code>record_id</code></p></li>
+PRISSMM Medical Oncologist Assessment datasets using <code>cohort</code>
+and <code>record_id</code></p></li>
 </ul>
 </div>
 <div id="cancer-diagnosis-non-bpc-project-cancer" class="section level4">
@@ -375,10 +376,11 @@ situ/non-invasive cancer diagnoses, and 2) other tumors.</p>
 following datasets:</p>
 <ul>
 <li><p>Cancer-Directed Regimen Dataset using variables
-<code>record_id</code> and <code>ca_seq</code></p></li>
+<code>cohort</code>, <code>record_id</code> and
+<code>ca_seq</code></p></li>
 <li><p>Patient Characteristics, PRISSMM Pathology, PRISSMM Imaging, and
-PRISSMM Medical Oncologist Assessment datasets using
-<code>record_id</code></p></li>
+PRISSMM Medical Oncologist Assessment datasets using <code>cohort</code>
+and <code>record_id</code></p></li>
 <li><p>Cannot be linked to the Cancer Panel Test dataset because non-BPC
 Project cancer diagnoses were not genomically sequenced</p></li>
 </ul>
@@ -408,12 +410,14 @@ investigational drug(s) are required to be masked.</p>
 datasets:</p>
 <ul>
 <li><p>BPC Project and non-BPC Project Cancer Diagnosis datasets using
-the variables <code>record_id</code> and <code>ca_seq</code></p></li>
+the variables <code>cohort</code>, <code>record_id</code> and
+<code>ca_seq</code></p></li>
 <li><p>Cancer Panel Test dataset using the variables
-<code>record_id</code> and <code>ca_seq</code></p></li>
+<code>cohort</code>, <code>record_id</code> and
+<code>ca_seq</code></p></li>
 <li><p>Patient Characteristics, PRISSMM Pathology, PRISSMM Imaging, and
-PRISSMM Medical Oncologist Assessment datasets using
-<code>record_id</code></p></li>
+PRISSMM Medical Oncologist Assessment datasets using <code>cohort</code>
+and <code>record_id</code></p></li>
 </ul>
 </div>
 <div id="cancer-directed-radiation-therapy-dataset" class="section level3">
@@ -455,12 +459,14 @@ cancer and subsequent BPC Project cancer diagnoses).</p>
 <p>The PRISSMM Pathology dataset can be linked to the following
 datasets:</p>
 <ul>
-<li><p>Cancer Panel Test dataset using <code>record_id</code>,
-<code>ca_seq</code>, <code>path_proc_number</code> and
+<li><p>Cancer Panel Test dataset using <code>cohort</code> and
+<code>record_id</code>, <code>ca_seq</code>,
+<code>path_proc_number</code> and
 <code>path_report_number</code></p></li>
 <li><p>Patient Characteristics, BPC Project and Non-BPC Project Cancer
 Diagnosis, Cancer-Directed Regimen, PRISSMM Imaging, and PRISSMM Medical
-Oncologist Assessment datasets using <code>record_id</code></p></li>
+Oncologist Assessment datasets using <code>cohort</code> and
+<code>record_id</code></p></li>
 </ul>
 </div>
 <div id="prissmm-imaging-dataset" class="section level3">
@@ -508,17 +514,47 @@ used interchangeably.</p>
 datasets:</p>
 <ul>
 <li><p>BPC Project Cancer Diagnosis dataset using the variables
-<code>record_id</code> and <code>ca_seq</code></p></li>
+<code>cohort</code>, <code>record_id</code> and
+<code>ca_seq</code></p></li>
 <li><p>Cancer-Directed Regimen dataset using the variables
-<code>record_id</code> and <code>ca_seq</code></p></li>
-<li><p>PRISSMM Pathology dataset using <code>record_id</code>,
-<code>ca_seq</code>, <code>path_proc_number</code> and
+<code>cohort</code>, <code>record_id</code> and
+<code>ca_seq</code></p></li>
+<li><p>PRISSMM Pathology dataset using <code>cohort</code>,
+<code>record_id</code>, <code>ca_seq</code>,
+<code>path_proc_number</code> and
 <code>path_report_number</code></p></li>
 </ul>
 <p><em>Note: this dataset cannot be linked to the non-BPC Project Cancer
 Diagnosis dataset because non-BPC Project cancer diagnoses were not
 genomically sequenced.</em></p>
 </div>
+</div>
+<div id="differences-between-synapse-and-cbioportal-genomic-data" class="section level1">
+<h1>Differences Between Synapse and cBioPortal Genomic Data</h1>
+<p>Please note that pulling genomic GENIE data from Synapse using
+<code>pull_data_synapse()</code> and pulling GENIE data from cBioPortal
+may result in small differences in the data due to systematic
+differences in the processing pipelines employed by Synapse and
+cBioPortal. These differences may include:</p>
+<ul>
+<li><p>Data formatting - Some data sets (e.g. CNA files) may appear in
+wide format in Synapse data versus long format in cBioPortal data, or
+column attributes and names may appear sightly different (e.g. fusions
+files).</p></li>
+<li><p>Default filtering - By default, cBioPortal filters out Silent,
+Intron, IGR, 3’UTR, 5’UTR, 3’Flank and 5’Flank, except for the promoter
+mutations of the TERT gene. See <a href="https://docs.cbioportal.org/file-formats/#mutation-data">cBioPortal
+documentation</a> for more details. These mutations are retained in
+Synapse processing pipelines.</p></li>
+<li><p>Hugo Symbols - Some genes have more than one accepted Hugo Symbol
+and may be referred to differently between data sources
+(e.g. <code>NSD3</code> is an alias for <code>WHSC1L1</code>). Some
+tools exist to help you resolve gene aliases across genomic data
+sources. See <code>gnomeR::recode_alias()</code>,
+<code>cbioportal::get_alias()</code> and vignettes from the <a href="https://mskcc-epi-bio.github.io/gnomeR/">{gnomeR}</a> and <a href="https://www.karissawhiting.com/cbioportalR/">{cbioportalR}</a> for
+more information on how to use these functions and work with gene
+aliases.</p></li>
+</ul>
 </div>
 
 

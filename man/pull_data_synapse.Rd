@@ -9,14 +9,15 @@ pull_data_synapse(
   version = NULL,
   download_location = NULL,
   username = NULL,
-  password = NULL
+  password = NULL,
+  pat = NULL
 )
 }
 \arguments{
 \item{cohort}{Vector or list specifying the cohort(s) of interest. Must be
 one of "NSCLC" (Non-Small Cell Lung Cancer), "CRC" (Colorectal Cancer), or
 "BrCa" (Breast Cancer), "PANC" (Pancreatic Cancer), "Prostate" (Prostate Cancer),
-and "BLADDER" (Bladder Cancer).}
+and "BLADDER" (Bladder Cancer). This is not case sensitive.}
 
 \item{version}{Vector specifying the version of the cohort. Must match one of the
 release versions available for the specified `cohort` (see `synapse_version()` for available cohort versions).
@@ -33,6 +34,8 @@ specified, data are not read into the R environment.}
 \item{username}{'Synapse' username}
 
 \item{password}{'Synapse' password}
+
+\item{pat}{'Synapse' personal access token}
 }
 \value{
 Returns a nested list of clinical and genomic data corresponding to
@@ -57,6 +60,10 @@ To set your 'Synapse' credentials during each session, call:
 
 `set_synapse_credentials(username = "your_username", password = "your_password")`
 
+In addition to passing your 'Synapse' username and password, you may choose to set
+your 'Synapse' Personal Access Token (PAT) by calling:
+ `set_synapse_credentials(pat = "your_pat")`.
+
 If your credentials are stored as environmental variables, you do not need to
 call `set_synapse_credentials()` explicitly each session. To store
 authentication information in your environmental variables, add the following
@@ -66,8 +73,9 @@ to your .Renviron file, then restart your R session ' (tip: you can use
 \itemize{
    \item `SYNAPSE_USERNAME = <your-username>`
    \item `SYNAPSE_PASSWORD = <your-password>`
+   \item `SYNAPSE_PAT = <your-pat>`
    }
-Alternatively, you can pass your username and password to each individual
+Alternatively, you can pass your username and password or your PAT to each individual
 data pull function if preferred, although it is recommended that you manage
 your passwords outside of your scripts for security purposes.
 }
@@ -80,6 +88,7 @@ your passwords outside of your scripts for security purposes.
   \item \href{https://www.synapse.org/#!Synapse:syn23002641}{NSCLC v1.1-Consortium Analytic Data Guide}
   \item \href{https://www.synapse.org/#!Synapse:syn53463493}{NSCLC v2.2-Consortium Analytic Data Guide}
   \item \href{https://www.synapse.org/#!Synapse:syn30557304}{NSCLC v2.0-Public Analytic Data Guide}
+  \item \href{https://www.synapse.org/#!Synapse:syn58597690}{NSCLC v3.1-Consortium Analytic Data Guide}
   \item \href{https://www.synapse.org/#!Synapse:syn53463650}{CRC v1.3-Consortium Analytic Data Guide}
   \item \href{https://www.synapse.org/#!Synapse:syn31751466}{CRC v2.0-Public Analytic Data Guide}
   \item \href{https://www.synapse.org/#!Synapse:syn26077313}{BrCa v1.1-Consortium Analytic Data Guide}
@@ -94,7 +103,7 @@ your passwords outside of your scripts for security purposes.
 }
 
 \examples{
-\dontshow{if (genieBPC::.is_connected_to_genie()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (genieBPC::.is_connected_to_genie(pat = Sys.getenv("SYNAPSE_PAT"))) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Example 1 ----------------------------------
 # Set up 'Synapse' credentials
 set_synapse_credentials()

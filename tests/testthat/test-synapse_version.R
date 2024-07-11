@@ -1,6 +1,6 @@
 test_that("Testing synapse version", {
   # exit if user doesn't have synapser, a log in, or access to data.
-  testthat::skip_if_not(.is_connected_to_genie())
+  testthat::skip_if_not(.is_connected_to_genie(pat = Sys.getenv("SYNAPSE_PAT")))
 
   expect_equal(
     class(synapse_version(most_recent = FALSE)),
@@ -48,4 +48,37 @@ test_that("Test cohort argument", {
            distinct(cohort, version) %>%
            filter(cohort %in% c("NSCLC", "CRC")))
   )
+})
+
+test_that("Test `cohort` argument specification casing", {
+  # expect lower case cohort to work
+  expect_equal(synapse_version(cohort = "NSCLC"),
+               synapse_version(cohort = "nsclc"))
+
+  expect_equal(synapse_version(cohort = "CRC"),
+               synapse_version(cohort = "crC"))
+
+  expect_equal(synapse_version(cohort = "BrCa"),
+               synapse_version(cohort = "BRCA"))
+
+  expect_equal(synapse_version(cohort = "PANC"),
+               synapse_version(cohort = "Pancreas"))
+
+  expect_equal(synapse_version(cohort = "PANC"),
+               synapse_version(cohort = "Panc"))
+
+  expect_equal(synapse_version(cohort = "Prostate"),
+               synapse_version(cohort = "PROState"))
+
+  expect_equal(synapse_version(cohort = "BLADDER"),
+               synapse_version(cohort = "Bladder"))
+})
+
+test_that("Test most_recent = TRUE", {
+  # expect 1 row per cohort
+  expect_equal(synapse_version(most_recent = TRUE) %>%
+                 nrow(),
+               synapse_version(most_recent = TRUE) %>%
+                 dplyr::distinct(cohort) %>%
+                 nrow())
 })

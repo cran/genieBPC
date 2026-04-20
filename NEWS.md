@@ -1,3 +1,26 @@
+# genieBPC 2.2.0
+
+* Add PANC v1.0-public (#162) and Prostate v1.0-public (#164) data releases
+
+# genieBPC 2.1.1
+
+* Add CRC v3.1-consortium, RENAL v1.1-consortium, and BrCa v1.0-public data releases (#148)
+
+* Update tests to use setup.R file and to only run current data releases on CRAN and GitHub Actions (all data releases are tested when running locally)
+
+# genieBPC 2.1.0
+
+* Update `create_analytic_cohort()` to allow cohorts to be created based on multiple cancer types. Previously, only one cancer type at a time was permitted.
+
+* Update GitHub actions to v4
+
+* Breaking change: Remove access to GENIE BPC data on Synapse via username and password per updated Synapse requirements. Access to the data is now via Personal Access Token (PAT) only. 
+
+* Deprecate functions allowing data access by username and password. 
+  - Remove `.get_token_by_username()` function
+  - Remove `.get_token_by_pat()` function (it is now redundant with `.get_synapse_token()`) 
+  - added `.verify_pat_works()` helper function
+
 # genieBPC 2.0.1
 
 * Update 'cohort' parameter of `pull_data_synapse()` and `synapse_version()` to not be case-sensitive (#120)
@@ -48,7 +71,6 @@
 * Removed **CRC v1.1-consortium** release - Due to the inadvertent inclusion of data indicative of ages over 89 for data associated with the Project GENIE BioPharma Collaborative, this release was replaced with the newly added **CRC v1.3-consortium** release. 
 
 * Removed **CRC v1.2-consortium** release - Due to the inadvertent inclusion of data indicative of ages over 89 for data associated with the Project GENIE BioPharma Collaborative, this release was replaced with the newly added **CRC v1.3-consortium** release. 
-
 
 # genieBPC 1.1.0
 
@@ -119,7 +141,6 @@ pass the CRAN checks.
 ### Data Release Updates
 
 * Incorporated the most recent public and consortium data releases (issue #42)
-
 
 # genieBPC 0.1.0
 

@@ -1,14 +1,16 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
 <!-- badges: start -->
 
 [![R-cmd-check](https://github.com/GENIE-BPC/genieBPC/workflows/R-cmd-check/badge.svg)](https://github.com/GENIE-BPC/genieBPC/actions)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/genieBPC)](https://cran.r-project.org/package=genieBPC)
 [![codecov](https://codecov.io/gh/GENIE-BPC/genieBPC/branch/main/graph/badge.svg?token=431LhDhF5K)](https://app.codecov.io/gh/GENIE-BPC/genieBPC)
+
 <!-- badges: end -->
 
-# genieBPC <img src="man/figures/geniebpc_hex_sticker.png" align="right" height="120" /></a>
+# genieBPC <img src="man/figures/geniebpc_hex_sticker.png" align="right" height="120"/></a>
 
 The American Association for Cancer Research Project Genomics Evidence
 Neoplasia Information Exchange Biopharma Collaborative (GENIE BPC) is an
@@ -50,7 +52,7 @@ remotes::install_github("GENIE-BPC/genieBPC")
 
   - `create_analytic_cohort()` selects an analytic cohort based on
     cancer diagnosis information and/or cancer-directed drug regimen
-    information  
+    information
   - `select_unique_ngs()` selects a unique next generation sequencing
     (NGS) test corresponding to the selected diagnoses
 
@@ -69,15 +71,22 @@ order to use this function. To obtain access:
     sure to create a username and password. *Note: do NOT connect via
     your Google account.*
 
-2.  Accept the **Synapse account terms of use.**
+2.  *New July 2025* Enable two-factor authentication on Synapse. This
+    step is required for accessing the data via {genieBPC}. You will not
+    need to use two-factor authentication each time you pull the data.
+    However, it is required that you enable two-factor authentication to
+    allow your Personal Access Token (PAT) to successfully pull the data
+    via {genieBPC}.
 
-3.  Navigate to [GENIE Biopharma Collaborative Public
+3.  Accept the **Synapse account terms of use.**
+
+4.  Navigate to [GENIE Biopharma Collaborative Public
     page](https://www.synapse.org/Synapse:syn27056172/wiki/616601).
 
-4.  In the Files folder, navigate to Data Releases and click on the
+5.  In the Files folder, navigate to Data Releases and click on the
     cancer cohort and data release version of choice.
 
-5.  Select *Request Access*, **review the terms of data use,** and
+6.  Select *Request Access*, **review the terms of data use,** and
     select *Accept.*
 
 ***For consortium data releases (restricted to GENIE consortium members
@@ -87,22 +96,30 @@ order to use this function. To obtain access:
     sure to create a username and password. *Note: do NOT connect via
     your Google account.*
 
-2.  Accept the **Synapse account terms of use.**
+2.  *New July 2025* Enable two-factor authentication on Synapse. This
+    step is required for accessing the data via {genieBPC}. You will not
+    need to use two-factor authentication each time you pull the data.
+    However, it is required that you enable two-factor authentication to
+    allow your Personal Access Token (PAT) to successfully pull the data
+    via {genieBPC}.
 
-3.  Use [this link](https://www.synapse.org/#!Team:3399797) to access
-    the GENIE BPC team list and request to join the team. Please include
-    your full name and affiliation in the message before sending out the
-    request. *(Note: Please allow up to a week to review and grant
-    access.)*
+3.  Accept the **Synapse account terms of use.**
 
-4.  Once the request is accepted, you may access the data in the [GENIE
+4.  Email <genieinfo@aacr.org> with your full name and affiliation to
+    request a concept sheet. Once the concept sheet has been reviewed
+    and approval has been granted by the Data Use and Publications
+    Committee, access to the consortium data on Synapse will then be
+    assigned to that user. *(Note: Please allow up to a week to review
+    and grant access.)*
+
+5.  Once the request is accepted, you may access the data in the [GENIE
     Biopharma Collaborative
     projects](https://www.synapse.org/#!Synapse:syn21226493).
 
-5.  In the Files folder, navigate to Data Releases and click on the
+6.  In the Files folder, navigate to Data Releases and click on the
     cancer cohort and data release version of choice.
 
-6.  Select *Request Access*, **review the terms of data use,** and
+7.  Select *Request Access*, **review the terms of data use,** and
     select *Accept.*
 
 *Note: permissions for Synapse and permissions for each data release are
@@ -111,8 +128,10 @@ data.*
 
 ***Request a Synapse Personal Access Token (PAT):***
 
-Once you are logged into your Synapse account, you may request a Synapse
-personal access token (PAT).
+Once you are logged into your Synapse account, request a Synapse
+personal access token (PAT). As of July 2025, this is the only method
+that permits accessing the data via the {genieBPC} R package.
+Previously, username and passwords were also accepted.
 
 1.  In the left hand panel towards the bottom, click the button that
     shows the first letter of your first name. This button displays the
@@ -157,6 +176,18 @@ its corresponding variables for each data release.
   Guide](https://www.synapse.org/#!Synapse:syn31751466) *Released August
   2022*
 
+- [BrCa v1.0-Public Analytic Data
+  Guide](https://www.synapse.org/#!Synapse:syn71825209) *Released
+  December 2025*
+
+- [PANC v1.0-Public Analytic Data
+  Guide](https://www.synapse.org/Synapse:syn72666511) *Released January
+  2026*
+
+- [Prostate v1.0-Public Analytic Data
+  Guide](https://www.synapse.org/Synapse:syn73963128) *Released March
+  2026*
+
 **Consortium Data Releases**  
 *Note that only GENIE BPC consortium users have access to the consortium
 releases.*
@@ -172,6 +203,9 @@ releases.*
 
 - [CRC v1.3-Consortium Analytic Data
   Guide](https://www.synapse.org/#!Synapse:syn53463650)
+
+- [CRC v3.1-Consortium Analytic Data
+  Guide](https://www.synapse.org/#!Synapse:syn64425776)
 
 - [BrCa v1.1-Consortium Analytic Data
   Guide](https://www.synapse.org/#!Synapse:syn26077313)
@@ -196,6 +230,9 @@ releases.*
 
 - [Prostate v1.2-Consortium Analytic Data
   Guide](https://www.synapse.org/#!Synapse:syn50612204)
+
+- [RENAL v1.1-Consortium Analytic Data
+  Guide](https://www.synapse.org/#!Synapse:syn69750457)
 
 ## Example
 
@@ -236,9 +273,16 @@ sunplot <- drug_regimen_sunburst(data_synapse = nsclc_2_0$NSCLC_v2.0,
 *Example of a sunburst plot showing 3 treatment regimens, highlighting
 the first treatment regimen:*
 
-# <img src="man/figures/genieBPC_sunburst2.png" height="400" /></a>
+# <img src="man/figures/genieBPC_sunburst2.png" height="400"/></a>
 
 ## GENIE BPC Publications
+
+Acebedo A, Bedard PL, Brown S, et al: [Collaborating across sectors in
+service of open science, precision oncology, and patients: an overview
+of the AACR Project GENIE (Genomics Evidence Neoplasia Information
+Exchange) Biopharma Collaborative
+(BPC)](https://www.esmorwd.org/article/S2949-8201(24)00075-4/fulltext).
+ESMO Real World Data and Digital Oncology 7:100097, 2025
 
 Lavery JA, Brown S, Curry MA, Martin A, Sjoberg DD, Whiting K. [A data
 processing pipeline for the AACR project GENIE biopharma collaborative

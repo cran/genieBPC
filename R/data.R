@@ -8,7 +8,8 @@
 #'   \item{cohort}{GENIE BPC Project cancer. One of "NSCLC"
 #'   (non-small cell lung cancer), "CRC" (colorectal cancer),
 #'   "BrCa" (breast cancer), "PANC" (pancreatic cancer),
-#'   "Prostate" (prostate cancer), and "BLADDER" (bladder cancer).}
+#'   "Prostate" (prostate cancer), "BLADDER" (bladder cancer),
+#'   and "RENAL" (renal cancer).}
 #'   \item{cohort_data_release}{GENIE BPC data release. Occasionally, drug names
 #'   were updated across releases to include additional drug name synonyms.}
 #'   \item{drug_name}{Name of generic/ingredient cancer-directed drug}
@@ -67,6 +68,21 @@
 #' @source \url{https://www.synapse.org/#!Synapse:syn21226493/wiki/599164}
 "synapse_tables"
 
+#' List of Institutions by Cohort
+#'
+#' A dataset containing the institutions participating in curation of each cancer cohort
+#'
+#' @format A lookup table for institutions participating in curation by cancer cohort
+#' \describe{
+#'   \item{cohort}{GENIE BPC Project cancer. One of "NSCLC"
+#'   (non-small cell lung cancer), "CRC" (colorectal cancer),
+#'   "BrCa" (breast cancer), "PANC" (pancreatic cancer),
+#'   "Prostate" (prostate cancer), "BLADDER" (bladder cancer), 
+#'   and "RENAL" (renal cancer).}
+#'   \item{institution}{GENIE BPC participating institution.}
+#'   ...
+#' }
+"cohort_institution"
 
 #' Simulated fake GENIE BPC data for function examples and tests
 #'

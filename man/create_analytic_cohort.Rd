@@ -31,11 +31,10 @@ index_ca_seq = c(1, 2) will return index cancers to
 patients with 1 index cancer and will return the first AND second index
 cancers to patients with multiple.}
 
-\item{institution}{GENIE BPC participating institution. Must be one of
-"DFCI", "MSK", "UHN", or "VICC" for NSCLC, BLADDER, Prostate, and PANC cohorts; must be one of "DFCI",
-"MSK", "VICC" for CRC and BrCa. Default selection is all institutions.
-This parameter corresponds to the variable `institution` in the
-Analytic Data Guide.}
+\item{institution}{GENIE BPC participating institution. See lookup table
+`cohort_institution` for a list of institutions participating in curation of
+each cancer cohort. Default selection is all institutions. This parameter
+corresponds to the variable `institution` in the Analytic Data Guide.}
 
 \item{stage_dx}{Stage at diagnosis. Must be one of "Stage I", "Stage II",
 "Stage III", "Stage I-III NOS", "Stage IV". The default selection is all
@@ -153,7 +152,7 @@ ex3 <- create_analytic_cohort(
   regimen_order_type = "within regimen"
 )
 
-\dontshow{if (genieBPC::.is_connected_to_genie(pat = Sys.getenv("SYNAPSE_PAT"))) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (genieBPC::.is_connected_to_genie(pat = Sys.getenv("SYNAPSE_PAT"))) withAutoprint(\{ # examplesIf}
 # Example 4 ----------------------------------
 # Using create_analytic_cohort with pull_data_synapse
 set_synapse_credentials()
